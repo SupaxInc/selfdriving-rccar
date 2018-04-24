@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MachineLearning</name>
+    </assembly>
+    <members>
+        <member name="T:MachineLearning.Functions">
+            <summary>
+            Functions class contains ActivationFunction enumeration, ActivationFunctionDelegate and some additional methods to perform various mathematical operations. Also contains enumerations for evolutionary algorithms.
+            </summary>
+        </member>
+        <member name="T:MachineLearning.Functions.MutationType">
+            <summary>
+            Mutation alters one or more gene values in a <see cref="P:MachineLearning.ISpecies.DNA"/> from its initial state.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.MutationType.Uniform">
+            <summary>
+            This operator replaces the value of the chosen gene with a uniform random value selected between the user-specified upper and lower bounds for that gene.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.MutationType.Gaussian">
+            <summary>
+            This operator adds a unit Gaussian distributed random value to the chosen gene. If it falls outside of the user-specified lower or upper bounds for that gene, the new gene value is clipped.
+            </summary>
+        </member>
+        <member name="T:MachineLearning.Functions.CrossoverType">
+            <summary>
+            CrossoverType enumeration contains 2 major crossover types for evolutionary algorithms.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.CrossoverType.SinglePoint">
+            <summary>
+            A single crossover point on both parents' organism DNA is selected. All data beyond that point in either organism DNA is swapped between the two parent organisms.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.CrossoverType.Uniform">
+            <summary>
+            The uniform crossover uses a fixed mixing ratio between two parents. The uniform crossover evaluates each bit in the parent DNA for exchange with a probability of 0.5.
+            </summary>
+        </member>
+        <member name="T:MachineLearning.Functions.ActivationFunction">
+            <summary>
+            ActivationFunction enumeration contains 4 major activation function types for neural networks.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.ActivationFunction.Tanh">
+            <summary>
+            Suppresses value to fit within -1.0 to 1.0 range.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.ActivationFunction.Logistic">
+            <summary>
+            Suppressed value to fit within 0.0 to 1.0 range.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.ActivationFunction.ReLU">
+            <summary>
+            ReLU activation function returns input itself if greater that 0.0, and 0.0 otherwise.
+            </summary>
+        </member>
+        <member name="F:MachineLearning.Functions.ActivationFunction.LeakyReLU">
+            <summary>
+            LeakyReLU activation function returns input if greater that 0.0, and 0.01 portion of input otherwise.
+            </summary>
+        </member>
+        <member name="T:MachineLearning.Functions.ActivationFunctionDelegate">
+            <summary>
+            Represents a method that will be used as activation function.
+            </summary>
+            <param name="input">Value to be non-linearly adjusted.</param>
+            <returns>Adjusted input value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Line(System.Double,System.Double,System.Double)">
+            <summary>
+            An equation of a line in slope-intercept form: y=m*x+b. Default equation is y=x.
+            </summary>
+            <param name="X">Represents x coordinate.</param>
+            <param name="A">Represents m coefficient.</param>
+            <param name="B">Represents y intercept.</param>
+            <returns>Y coordinate.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Parabola(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            An equation of a parabola in y=(a*x^2 + b*x + c) form.
+            </summary>
+            <param name="X">Represents x coordinate.</param>
+            <param name="A">Represents 'a' coefficient.</param>
+            <param name="B">Represents 'b' coefficient.</param>
+            <param name="C">Represents 'c' term.</param>
+            <returns>Y coordinate.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Hyperbola(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            An equation of hyperbola in y=(a*x^3 + b*x^2 + c*x + b) form.
+            </summary>
+            <param name="X">Represents x coordinate.</param>
+            <param name="A">Represents 'a' coefficient.</param>
+            <param name="B">Represents 'b' coefficient.</param>
+            <param name="C">Represents 'c' coefficient.</param>
+            <param name="D">Represents 'd' term.</param>
+            <returns>Y coordinate.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Map(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Re-maps a number from one range to another.
+            </summary>
+            <param name="X">Value to map.</param>
+            <param name="fromSource">The lower bound of the value’s current range</param>
+            <param name="toSource">The upper bound of the value’s current range</param>
+            <param name="fromTarget">The lower bound of the value’s target range</param>
+            <param name="toTarget">The upper bound of the value’s target range</param>
+            <returns>Mapped value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Tanh(System.Double)">
+            <summary>
+            Suppresses value to fit within -1.0 to 1.0 range.
+            </summary>
+            <param name="X">Value to suppress.</param>
+            <returns>Suppresed value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.TanhDerivative(System.Double)">
+            <summary>
+            Derivative of <see cref="M:MachineLearning.Functions.Tanh(System.Double)"/> function at the particular value. Can used to find gradient.
+            </summary>
+            <param name="X">Value at which the derivative is to be found.</param>
+            <returns>Derivative of the <see cref="M:MachineLearning.Functions.Tanh(System.Double)"/> function at the input value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Logistic(System.Double)">
+            <summary>
+            Suppressed value to fit within 0.0 to 1.0 range.
+            </summary>
+            <param name="X">Value to suppress.</param>
+            <returns>Suppressed value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.LogisticDerivative(System.Double)">
+            <summary>
+            Derivative of <see cref="M:MachineLearning.Functions.Logistic(System.Double)"/> function at the particular value. Can used to find gradient.
+            </summary>
+            <param name="X">Value at which the derivative is to be found.</param>
+            <returns>Derivative of the <see cref="M:MachineLearning.Functions.Logistic(System.Double)"/> function at the input value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.ReLU(System.Double)">
+            <summary>
+            Suppressed negative to be 0.0, or keeps input othrwise.
+            </summary>
+            <param name="X">Value to suppress.</param>
+            <returns>Suppressed value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.ReLUDerivative(System.Double)">
+            <summary>
+            Derivative of <see cref="M:MachineLearning.Functions.ReLU(System.Double)"/> function at the particular value. Can used to find gradient.
+            </summary>
+            <param name="X">Value at which the derivative is to be found.</param>
+            <returns>Derivative of the <see cref="M:MachineLearning.Functions.ReLU(System.Double)"/> function at the input value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.LeakyReLU(System.Double)">
+            <summary>
+            Supresses negative input to be 0.01 portion of itself, or keeps input otherwise.
+            </summary>
+            <param name="X">Value to suppress</param>
+            <returns>0.01 * X if X if less that 0, and X otherwise.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.LeakyReLUDerivative(System.Double)">
+            <summary>
+            Derivative of <see cref="M:MachineLearning.Functions.LeakyReLU(System.Double)"/> function at the particular value. Can used to find gradient.
+            </summary>
+            <param name="X">Value at which the derivative is to be found.</param>
+            <returns>Derivative of the <see cref="M:MachineLearning.Functions.LeakyReLU(System.Double)"/> function at the input value.</returns>
+        </member>
+        <member name="M:MachineLearning.Functions.Absolute(System.Double)">
+            <summary>
+            Returns the absolute value of a double-precision floating-point number.
+            </summary>
+            <param name="X">A number that is greater than or equal to System.Double.MinValue, but less than or equal to System.Double.MaxValue.</param>
+            <returns>A double-precision floating-point number, x, such that 0 ≤ x ≤System.Double.MaxValue.</returns>
+        </member>
+        <member name="T:MachineLearning.ExtensionMethods">
+            <summary>
+            This class is used to add Map and Absolute methods to any double objects.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.ExtensionMethods.Map(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Re-maps a number from one range to another.
+            </summary>
+            <param name="value">Value to map.</param>
+            <param name="fromSource">The lower bound of the value’s current range</param>
+            <param name="toSource">The upper bound of the value’s current range</param>
+            <param name="fromTarget">The lower bound of the value’s target range</param>
+            <param name="toTarget">The upper bound of the value’s target range</param>
+            <returns>Mapped value.</returns>
+        </member>
+        <member name="M:MachineLearning.ExtensionMethods.Absolute(System.Double)">
+            <summary>
+            Returns the absolute value of a double-precision floating-point number.
+            </summary>
+            <param name="value">A number that is greater than or equal to System.Double.MinValue, but less than or equal to System.Double.MaxValue.</param>
+            <returns>A double-precision floating-point number, x, such that 0 ≤ x ≤System.Double.MaxValue.</returns>
+        </member>
+        <member name="T:MachineLearning.IOList">
+            <summary>
+            Represents a collection of input-output pairs that can be accessed by index.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.IOList.Count">
+            <summary>
+            Gets the number of elements actually contained in the <see cref="T:MachineLearning.IOList"/>
+            </summary>
+        </member>
+        <member name="M:MachineLearning.IOList.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MachineLearning.IOList"/> class.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.IOList.#ctor(System.Collections.Generic.IList{System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.Double}}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MachineLearning.IOList"/> class as a wrapper for the specified list.
+            </summary>
+            <param name="list">The list that is wrapped by the new collection.</param>
+            <exception cref="T:System.ArgumentNullException">list is null.</exception>
+        </member>
+        <member name="M:MachineLearning.IOList.Add(System.Collections.Generic.List{System.Double},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Adds an input-output pair to the end of the <see cref="T:MachineLearning.IOList"/>.
+            </summary>
+            <param name="_Inputs">The input set to be added to the end of the <see cref="T:MachineLearning.IOList"/>.</param>
+            <param name="_Outputs">The output set to be added to the end of the <see cref="T:MachineLearning.IOList"/>.</param>
+        </member>
+        <member name="M:MachineLearning.IOList.ToString">
+            <summary>
+            Returns a string containing the current <see cref="P:MachineLearning.IOList.Count"/>.
+            </summary>
+            <returns>A string in format "Count = <see cref="P:MachineLearning.IOList.Count"/>.</returns>
+        </member>
+        <member name="T:MachineLearning.ISpecies">
+            <summary>
+            Defines a species to be used to create a <see cref="T:MachineLearning.Population`1"/>, where T is derived from <see cref="T:MachineLearning.Species"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.ISpecies.Fitness">
+            <summary>
+            Represents overall performance of <see cref="T:MachineLearning.Species"/>. Higher the fitness, higher the chances of this <see cref="T:MachineLearning.Species"/> to breed.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.ISpecies.DNA">
+            <summary>
+            Represents a sinle-dimensional array/list of <see cref="T:System.Double"/>'s, containing all weights of <see cref="T:MachineLearning.NeuralNetwork"/> in sequence.
+            </summary>
+        </member>
+        <member name="T:MachineLearning.NeuralLayer">
+            <summary>
+            The basic building block of the <see cref="T:MachineLearning.NeuralNetwork"/> class.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.ActivationFunction">
+            <summary>
+            Represents a method thar can be used as an activation function.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.ActivationFunctionDerivative">
+            <summary>
+            Represents a method that can be used a derivative of activation function.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.NumberOfInputs">
+            <summary>
+            Gets a number of input neurons in current layer including bias.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.NumberOfOutputs">
+            <summary>
+            Gets a number of output neurons in current layer.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.Inputs">
+            <summary>
+            A single-dimensional array of <see cref="T:System.Double"/>'s to hold input values.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.Outputs">
+            <summary>
+            A single-dimensional array of <see cref="T:System.Double"/>'s to hold output values.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.Weights">
+            <summary>
+            A two-dimensional array of <see cref="T:System.Double"/>'s to hold the weights of the connections between each input and output neurons.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.DeltaWeights">
+            <summary>
+            A two-dimensional array of <see cref="T:System.Double"/>'s containing a change by which each weight should be changed to minimize the error.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralLayer.PropagatedError">
+            <summary>
+            A single-dimensional array of <see cref="T:System.Double"/>'s containing a cumulative gradient of the error from most outer layer down to current layer by which the Delta of each weight should be calculated.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.#ctor(MachineLearning.Functions.ActivationFunctionDelegate,MachineLearning.Functions.ActivationFunctionDelegate,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MachineLearning.NeuralLayer"/> class.
+            </summary>
+            <param name="activationFunction">One of the non-linear <see cref="T:MachineLearning.Functions.ActivationFunction"/>'s.</param>
+            <param name="activationFunctionDerivative">Derivative of one of the non-linear <see cref="T:MachineLearning.Functions.ActivationFunction"/>'s</param>
+            <param name="NumberOfInputs">Number of input neurons without a bias.</param>
+            <param name="NumberOfOutputs">Number of output neurons.</param>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.FeedForward(System.Double[])">
+            <summary>
+            Propagates inputs throught weights and activation function to get the output.
+            </summary>
+            <param name="_Inputs">The input array of <see cref="T:System.Double"/>'s to be propagated forward. The size must be the same as specified in <see cref="T:MachineLearning.NeuralLayer"/>'s constructor (without bias).</param>
+            <returns>The product of Weights by Inputs matrices passed through activation function.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.BackPropagationForOutputNeurons(System.Double[])">
+            <summary>
+            Calculates DeltaWeights for output neurons only.
+            </summary>
+            <param name="Error">The single-dimensional array of <see cref="T:System.Double"/>'s representing a cost, or error, value for each output neuron.</param>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.BackPropagationForHiddenNeurons(System.Double[],System.Double[0:,0:])">
+            <summary>
+            Calculates DeltaWeight for hidden and/or input neurons only.
+            </summary>
+            <param name="PropagatedErrorOuter">A single-dimensional array of <see cref="T:System.Double"/>'s representing PropagatedError from next outer layer, that must be calculated before.</param>
+            <param name="WeightsOuter">A two-dimensional array of <see cref="T:System.Double"/>'s representing all weights (connections) values from net outer layer.</param>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.CorrectWeights(System.Double,System.Double)">
+            <summary>
+            Changes each weight/connection to minimize error.
+            </summary>
+            <param name="LearningRate">The magnitude by which each weight is to be changed.</param>
+            <param name="regularizationRate">The rate by wight L2 regularization occures. L2 regularization minimizes weights, so that all of them are close to 0.0.</param>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.RandomizeWeights">
+            <summary>
+            Randomizes all weights to be from -0.5 up to 0.5.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.NeuralLayer.Clone">
+            <summary>
+            Returns a deep copy of the <see cref="T:MachineLearning.NeuralLayer"/> object.
+            </summary>
+            <returns>A deep copy of the <see cref="T:MachineLearning.NeuralLayer"/> object.</returns>
+        </member>
+        <member name="T:MachineLearning.NeuralNetwork">
+            <summary>
+            Represents an artificial Neural Network made of multiple Neural Layers. Can be used as universal function approximator.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.LayersInfo">
+            <summary>
+            Contains information about number of neurons in each layer, starting from input layer, ending with output layer.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.Layers">
+            <summary>
+            List of <see cref="T:MachineLearning.NeuralLayer"/> (building blocks), contains information about <see cref="P:MachineLearning.NeuralLayer.Weights"/>, <see cref="P:MachineLearning.NeuralLayer.DeltaWeights"/> and <see cref="P:MachineLearning.NeuralLayer.PropagatedError"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.TotalError">
+            <summary>
+            Contains most recent value of a cost/error function (sum of squares of the errors) as a <see cref="T:System.Double"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.L2RegularizationPenalty">
+            <summary>
+            Contatins most recent value of a L2 regularization penalty. L2 regularization is sum of squares of all weights.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.ErrorQueue">
+            <summary>
+            Contains last 100 error values. Can be used to determine if error is stabilized.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.ActivationType">
+            <summary>
+            Represents the type of activation function.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.ActivationFunction">
+            <summary>
+            Represents a delegate to hold activation function.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.NeuralNetwork.ActivationFunctionDerivative">
+            <summary>
+            Represents a delegate to hold activation function derivative.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.#ctor(MachineLearning.Functions.ActivationFunction,System.Int32[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:MachineLearning.NeuralNetwork"/> with specified number of neurons in each layer.
+            </summary>
+            <param name="activationType">The type of <see cref="T:MachineLearning.Functions.ActivationFunction"/> to be used in <see cref="T:MachineLearning.NeuralNetwork"/>.</param>
+            <param name="layersInfo">A list of number of neurons in each layer starting at input layer. Can be entered as an array of <see cref="T:System.Int32"/>'s, or comma-separated <see cref="T:System.Int32"/> values.</param>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.Guess(System.Double[])">
+            <summary>
+            Uses forward propagation to get output based on the Inputs. Bias added automatically.
+            </summary>
+            <param name="Inputs">A single-dimensional array of <see cref="T:System.Double"/>'s, with the size of the number of the input neurons (without bias).</param>
+            <returns>A single-dimensional array of <see cref="T:System.Double"/>'s representing a product of weights by inputs matrices.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.Train(System.Double[],System.Double[],System.Double,System.Double)">
+            <summary>
+            Trains the <see cref="T:MachineLearning.NeuralNetwork"/> to approach given correct output(s) based on input(s).
+            </summary>
+            <param name="Inputs">A single-dimensional array of <see cref="T:System.Double"/>'s at which weights adjustments to be performed.</param>
+            <param name="CorrectOutputs">A single-dimensional array of <see cref="T:System.Double"/>'s representing correct set of outputs for the given inputs.</param>
+            <param name="LearningRate">The magnitude by which each weight is to be changed.</param>
+            <param name="regularizationRate">The rate by wight L2 regularization occures. L2 regularization minimizes weights, so that all of them are close to 0.0.</param>
+            <returns>A boolean value true if error is not stabilazed, or false if stable.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.Train(MachineLearning.IOList,System.Int32,System.Double,System.Double)">
+            <summary>
+            Trains the <see cref="T:MachineLearning.NeuralNetwork"/> to approach given correct input-output pairs from <see cref="T:MachineLearning.IOList"/> parameter, with indicated batch size.
+            </summary>
+            <param name="IOSets">A list of input and correct output pairs.</param>
+            <param name="batchSize">Number of input-output pairs to be processed at once to improve generalization.</param>
+            <param name="LearningRate">The magnitude by which each weight is to be changed.</param>
+            <param name="regularizationRate">The rate by wight L2 regularization occures. L2 regularization minimizes weights, so that all of them are close to 0.0.</param>
+            <returns>A boolean value true if error is not stabilazed, or false if stable.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.ToTrain">
+            <summary>
+            Determines if <see cref="T:MachineLearning.NeuralNetwork"/> has reached minimum error. Returns true if minimum is reached, and false is error is still changing.
+            </summary>
+            <returns>Returns true if minimum is reached, and false is error is still changing.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.Clone">
+            <summary>
+            Creates a deep copy of <see cref="T:MachineLearning.NeuralNetwork"/> object.
+            </summary>
+            <returns>An objec containing a deep copy of the original <see cref="T:MachineLearning.NeuralNetwork"/> object.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing information about all layers in <see cref="T:MachineLearning.NeuralNetwork"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representing information about <see cref="T:MachineLearning.NeuralNetwork"/> with format: 'Layers info: {number of inputs}, ... , {number of outputs}.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.GetFormula(System.Boolean)">
+            <summary>
+            Returns a formated formulas for each output neuron.
+            </summary>
+            <param name="labelsOnly">When set to true - returns formula wihout any coefficients, when false - returns formula with values of the weights from <see cref="P:MachineLearning.NeuralLayer.Weights"/>.</param>
+            <returns>Returns a <see cref="T:System.Collections.Generic.List`1"/>, where T is <see cref="T:System.String"/>, representing a formula for each output neuron.</returns>
+        </member>
+        <member name="M:MachineLearning.NeuralNetwork.GetNextLayerFormula(System.Collections.Generic.List{System.String},System.Int32,System.Boolean)">
+            <summary>
+            Builds a formula for specified layer of the <see cref="T:MachineLearning.NeuralNetwork"/> based on formulas of pervious layer's neurons.
+            </summary>
+            <param name="prevLayerEquations"></param>
+            <param name="nextLayerIndex"></param>
+            <param name="labelsOnly">When set to true - returns formula wihout any coefficients, when false - returns formula with values of the weights from <see cref="P:MachineLearning.NeuralLayer.Weights"/>.</param>
+            <returns>Returns a <see cref="T:System.Collections.Generic.List`1"/>, where T is <see cref="T:System.String"/>, representing a formula for a specified <see cref="T:MachineLearning.NeuralLayer"/>'s index.</returns>
+        </member>
+        <member name="T:MachineLearning.Population`1">
+            <summary>
+            Represents a collection of <see cref="T:MachineLearning.Species"/>. Contains methods and properties to evolve array of <see cref="T:MachineLearning.Species"/> to maximize the <see cref="P:MachineLearning.Species.Fitness"/> value.
+            </summary>
+            <typeparam name="T">Type must be derived from <see cref="T:MachineLearning.Species"/> class. The constructor of type T must have the same parameters as a constructor of <see cref="T:MachineLearning.Species"/>.</typeparam>
+        </member>
+        <member name="P:MachineLearning.Population`1.Members">
+            <summary>
+            Represents a list of all <see cref="T:MachineLearning.Species"/> objects, contained in <see cref="T:MachineLearning.Population`1"/> class, where T is derived from <see cref="T:MachineLearning.Species"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.Size">
+            <summary>
+            Represents the number of <see cref="T:MachineLearning.Species"/> in <see cref="T:MachineLearning.Population`1"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.LayersInfo">
+            <summary>
+            Contains information about number of neurons in each layer, starting from input layer, ending with output layer.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.BestMember">
+            <summary>
+            Represents a deep copy of the <see cref="T:MachineLearning.Species"/> with the highest numberic value of <see cref="P:MachineLearning.Species.Fitness"/> before each breeding cycle.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.CurrentGeneration">
+            <summary>
+            Represents a current total number of full breeding cycles past from the creation of <see cref="T:MachineLearning.Population`1"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.ActivationFunctionType">
+            <summary>
+            Represents the type of activation function for <see cref="T:MachineLearning.NeuralNetwork"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.Crossover">
+            <summary>
+            Represents the type of crossover to be used in <see cref="M:MachineLearning.Population`1.ToBreed"/> function.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.Mutation">
+            <summary>
+            Mutation alters one or more gene values in a <see cref="P:MachineLearning.ISpecies.DNA"/> from its initial state.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.MutationRate">
+            <summary>
+            The double-precision floaing-poing number represening a percent chance of each Weight to mutate and get a random value. Default value is 0.1.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.MaxMutationMagnitude">
+            <summary>
+            The double-precision floaing-poing number represening the magnitude of change in the Wieght in percentage of Weight value itself. Default value is 0.5.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Population`1.PercentToKeep">
+            <summary>
+            The double-precision floaing-poing number represening the percentage of <see cref="P:MachineLearning.Population`1.Members"/> to keep for breeding. Default value is 0.5.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.Population`1.#ctor(System.Int32,MachineLearning.Functions.ActivationFunction,System.Int32[])">
+            <summary>
+            Initializes a new instance of <see cref="T:MachineLearning.Population`1"/>, where T is derived from <see cref="T:MachineLearning.Species"/>, with indicated <see cref="P:MachineLearning.Population`1.Size"/> and structure of <see cref="T:MachineLearning.NeuralNetwork"/>.
+            </summary>
+            <param name="Size">The number of <see cref="T:MachineLearning.Species"/> that the new <see cref="T:MachineLearning.Population`1"/> will have.</param>
+            <param name="activationType">The type of <see cref="T:MachineLearning.Functions.ActivationFunction"/> to be used in <see cref="T:MachineLearning.NeuralNetwork"/>.</param>
+            <param name="LayersInfo">A list of number of neurons in each layer starting at input layer. Can be entered as an array of <see cref="T:System.Int32"/>'s, or comma-separated <see cref="T:System.Int32"/> values.</param>
+        </member>
+        <member name="M:MachineLearning.Population`1.SortSpeciesByFitness">
+            <summary>
+            Perfors an ascending bubble-sort algorythm based on <see cref="P:MachineLearning.Species.Fitness"/>.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.Population`1.NormalizeFitness">
+            <summary>
+            Normalizes all <see cref="P:MachineLearning.Species.Fitness"/> values to be relaive to minimum and maximum <see cref="P:MachineLearning.Species.Fitness"/> values of current <see cref="T:MachineLearning.Population`1"/> using <see cref="M:MachineLearning.Functions.Map(System.Double,System.Double,System.Double,System.Double,System.Double)"/> method.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.Population`1.GetRandomSpecies(System.Boolean)">
+            <summary>
+            Performs a probability based random selection of the <see cref="T:MachineLearning.Species"/> based on <see cref="P:MachineLearning.Species.Fitness"/>. Higher the <see cref="P:MachineLearning.Species.Fitness"/> - higher the chance of <see cref="T:MachineLearning.Species"/> to be selected. All <see cref="T:MachineLearning.Species"/> in <see cref="T:MachineLearning.Population`1"/> must be sorted.
+            </summary>
+            <param name="ascending">Represends ascending or descending order of evaluation. True - higher <see cref="P:MachineLearning.Species.Fitness"/> value means higher chance of been chosen, False - lower value of <see cref="P:MachineLearning.Species.Fitness"/> means higher chance of been chosen.</param>
+            <returns>A randomly chosen <see cref="T:MachineLearning.Species"/> based on its <see cref="P:MachineLearning.Species.Fitness"/> value.</returns>
+        </member>
+        <member name="M:MachineLearning.Population`1.MutateBrain(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Returns a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:System.Double"/>'s, representing a changed InputDNA List based on probability of mutation.
+            </summary>
+            <param name="InputDNA">A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:System.Double"/>'s representing an array of <see cref="P:MachineLearning.NeuralLayer.Weights"/> to be mutated.</param>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:System.Double"/>'s, representing a changed InputDNA List based on probability of mutation.</returns>
+        </member>
+        <member name="M:MachineLearning.Population`1.MutateSpecies">
+            <summary>
+            Mutates all <see cref="T:MachineLearning.Species"/> in <see cref="T:MachineLearning.Population`1"/> based on MutationRate.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.Population`1.ToBreed">
+            <summary>
+            Main aspect of evolutionary algorythm. <see cref="T:MachineLearning.Species"/> with higher <see cref="P:MachineLearning.Species.Fitness"/> has higher change of passing its <see cref="P:MachineLearning.Species.DNA"/> to offsprings.
+            </summary>
+            <returns>A number representing highest <see cref="P:MachineLearning.Species.Fitness"/> value among all <see cref="P:MachineLearning.Population`1.Members"/>.</returns>
+        </member>
+        <member name="M:MachineLearning.Population`1.CreateChildren(System.Collections.Generic.List{System.Double},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Generates an array conaining 2 children from genome/<see cref="P:MachineLearning.Species.DNA"/> of 2 parent <see cref="T:MachineLearning.Species"/>.
+            </summary>
+            <param name="parentA_DNA">First parent <see cref="T:MachineLearning.Species"/> to get <see cref="P:MachineLearning.Species.DNA"/> from.</param>
+            <param name="parentB_DNA">Second parent <see cref="T:MachineLearning.Species"/> to get <see cref="P:MachineLearning.Species.DNA"/> from.</param>
+            <returns>An array of <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:System.Double"/>s populated with children with genome samples of both parents <see cref="P:MachineLearning.Species.DNA"/>.</returns>
+        </member>
+        <member name="M:MachineLearning.Population`1.TrainSpecies(System.Double[],System.Double[],System.Double,System.Double)">
+            <summary>
+            Trains each <see cref="T:MachineLearning.Species"/> to approach given correct output(s) based on input(s).
+            </summary>
+            <param name="Inputs">A single-dimensional array of <see cref="T:System.Double"/>'s at which weights adjustments to be performed.</param>
+            <param name="CorrectOutputs">A single-dimensional array of <see cref="T:System.Double"/>'s representing correct set of outputs for the given inputs.</param>
+            <param name="LearningRate">The magnitude by which each weight is to be changed.</param>
+            <param name="regulregularizationRate">The rate by wight L2 regularization occures. L2 regularization minimizes weights, so that all of them are close to 0.0.</param>
+        </member>
+        <member name="M:MachineLearning.Population`1.TrainSpecies(MachineLearning.IOList,System.Int32,System.Double,System.Double)">
+            <summary>
+            Trains each <see cref="T:MachineLearning.Species"/> to approach given correct input-output pairs from <see cref="T:MachineLearning.IOList"/> parameter, with indicated batch size.
+            </summary>
+            <param name="IOSets">A list of input and correct output pairs.</param>
+            <param name="batchSize">Number of input-output pairs to be processed at once to improve generalization.</param>
+            <param name="LearningRate">The magnitude by which each weight is to be changed.</param>
+            <param name="regulregularizationRate">The rate by wight L2 regularization occures. L2 regularization minimizes weights, so that all of them are close to 0.0.</param>
+        </member>
+        <member name="M:MachineLearning.Population`1.ToString">
+            <summary>
+            Returns a string contining the <see cref="P:MachineLearning.Population`1.Size"/>.
+            </summary>
+            <returns>A string contining the <see cref="P:MachineLearning.Population`1.Size"/>.</returns>
+        </member>
+        <member name="T:MachineLearning.Species">
+            <summary>
+            Represents a derived <see cref="T:MachineLearning.NeuralNetwork"/> with a <see cref="P:MachineLearning.Species.Fitness"/> to be used in <see cref="T:MachineLearning.Population`1"/>, where T is derived from <see cref="T:MachineLearning.Species"/>.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Species.Fitness">
+            <summary>
+            Represents overall performance of <see cref="T:MachineLearning.Species"/>. Higher the fitness, higher the chances of this <see cref="T:MachineLearning.Species"/> to breed.
+            </summary>
+        </member>
+        <member name="P:MachineLearning.Species.DNA">
+            <summary>
+            Represents a sinle-dimensional array/list of <see cref="T:System.Double"/>'s, containing all weights of <see cref="T:MachineLearning.NeuralNetwork"/> in sequence.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.Species.#ctor(MachineLearning.Functions.ActivationFunction,System.Int32[])">
+            <summary>
+            Initializes an instance of <see cref="T:MachineLearning.Species"/> with the specified parameters.
+            </summary>
+            <param name="activationType">The type of <see cref="T:MachineLearning.Functions.ActivationFunction"/> to be used in <see cref="T:MachineLearning.NeuralNetwork"/>.</param>
+            <param name="layersInfo">A list of number of neurons in each layer starting at input layer. Can be entered as an array of <see cref="T:System.Int32"/>'s, or comma-separated <see cref="T:System.Int32"/> values.</param>
+        </member>
+        <member name="M:MachineLearning.Species.#ctor(MachineLearning.Functions.ActivationFunction,System.Int32[],System.Collections.Generic.List{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MachineLearning.NeuralNetwork"/> with specified number of neurons in each layer, <see cref="P:MachineLearning.NeuralLayer.Weights"/> are going to be populated from specified DNA parameter.
+            </summary>
+            <param name="activationType">The type of <see cref="T:MachineLearning.Functions.ActivationFunction"/> to be used in <see cref="T:MachineLearning.NeuralNetwork"/>.</param>
+            <param name="layersInfo">A list of number of neurons in each layer starting at input layer. Can be entered as array of <see cref="T:System.Int32"/>'s, or comma-separated <see cref="T:System.Int32"/> values.</param>
+            <param name="_DNA">A <see cref="T:System.Collections.Generic.List`1"/> of Weights, where T is <see cref="T:System.Double"/>, to populate all <see cref="P:MachineLearning.NeuralLayer.Weights"/>.</param>
+        </member>
+        <member name="M:MachineLearning.Species.SetWeightsFromList(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Sets all weights in <see cref="T:MachineLearning.NeuralNetwork"/> from a <see cref="T:System.Collections.Generic.List`1"/>, where T is <see cref="T:System.Double"/>. Can be used to initialize weights from a single-dimensional array of <see cref="T:System.Double"/>'s.
+            </summary>
+            <param name="InputWeights"></param>
+        </member>
+        <member name="M:MachineLearning.Species.GetWeightsAsList">
+            <summary>
+            Returns a single-dimesional array of <see cref="T:System.Double"/>'s, representing all weights in <see cref="T:MachineLearning.NeuralNetwork"/>.
+            </summary>
+            <returns>Return a <see cref="T:System.Collections.Generic.List`1"/>, where T is <see cref="T:System.Double"/>. Contains </returns>
+        </member>
+        <member name="M:MachineLearning.Species.ToString">
+            <summary>
+            Return a string containing a formated fitness value.
+            </summary>
+            <returns>A string containing a formated fitness value.</returns>
+        </member>
+        <member name="M:MachineLearning.Species.Clone">
+            <summary>
+            Creates a deep copy of the <see cref="T:MachineLearning.Species"/> object.
+            </summary>
+            <returns>A copy of original <see cref="T:MachineLearning.Species"/> object, populated with the same data.</returns>
+        </member>
+        <member name="T:MachineLearning.ThreadSafeRandom">
+            <summary>
+            ThreadSafeRandom class contains methods to generate random values without cross-thread interference.
+            </summary>
+        </member>
+        <member name="M:MachineLearning.ThreadSafeRandom.Next">
+            <summary>Returns a non-negative random integer.</summary>
+            <returns>A 32-bit signed integer that is greater than or equal to 0 and less than System.Int32.MaxValue.</returns>
+        </member>
+        <member name="M:MachineLearning.ThreadSafeRandom.Next(System.Int32)">
+            <summary>
+            Returns a non-negative random integer that is less than the specified maximum.
+            </summary>
+            <param name="maxValue">The exclusive upper bound of the random number to be generated. maxValue must be greater than or equal to 0.</param>
+            <returns>A 32-bit signed integer that is greater than or equal to 0, and less than maxValue; that is, the range of return values ordinarily includes 0 but not maxValue. However, if maxValue equals 0, maxValue is returned.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">maxValue is less than 0.</exception>
+        </member>
+        <member name="M:MachineLearning.ThreadSafeRandom.Next(System.Int32,System.Int32)">
+            <summary>
+            Returns a random integer that is within a specified range.
+            </summary>
+            <param name="minValue">The inclusive lower bound of the random number returned.</param>
+            <param name="maxValue">The exclusive upper bound of the random number returned. maxValue must be greater than or equal to minValue.</param>
+            <returns>A 32-bit signed integer greater than or equal to minValue and less than maxValue; that is, the range of return values includes minValue but not maxValue. If minValue equals maxValue, minValue is returned.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">minValue is greater than maxValue.</exception>
+        </member>
+        <member name="M:MachineLearning.ThreadSafeRandom.NextDouble">
+            <summary>
+            Returns a random floating-point number that is greater than or equal to 0.0, and less than 1.0.
+            </summary>
+            <returns>A double-precision floating point number that is greater than or equal to 0.0, and less than 1.0.</returns>
+        </member>
+        <member name="M:MachineLearning.ThreadSafeRandom.SetLocal">
+            <summary>
+            SetLocal creates a local Random object for a current thread.
+            </summary>
+        </member>
+    </members>
+</doc>
