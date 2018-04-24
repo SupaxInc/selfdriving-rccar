@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=PyServer
+Exec=lxterminal -e python3 /home/pi/Desktop/project/selfdrivingrpi/main.py &
+Icon=lxterminal
+Type=Application
+Categories=Utility;
